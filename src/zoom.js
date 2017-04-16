@@ -245,9 +245,15 @@ export default function() {
     g.start();
 
     function mousemoved() {
+      var newMouse = mouse(g.that);
+      // if the mouse didn't actually move
+      if (g.mouse[0][0] == newMouse[0] && g.mouse[0][1] == newMouse[1]) {
+        return;
+      }
+
       noevent();
       g.moved = true;
-      g.zoom("mouse", constrain(translate(g.that.__zoom, g.mouse[0] = mouse(g.that), g.mouse[1]), g.extent));
+      g.zoom("mouse", constrain(translate(g.that.__zoom, g.mouse[0] = newMouse, g.mouse[1]), g.extent));
     }
 
     function mouseupped() {
